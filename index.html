@@ -1,0 +1,443 @@
+  <!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bragg Care Business Advisory</title>
+
+<style>
+  :root{
+    --navy:#1E2E5C;
+    --blue:#33499E;
+    --plum:#4A1D3C;
+    --magenta:#C31798;
+    --magenta-deep:#9A1179;
+    --charcoal:#3A3A3A;
+    --bg:#FBF8FA;
+    --bg-panel:#F3ECF1;
+    --bg-dark:#241226;
+    --border:#E4D9E2;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--charcoal);
+    font-family:'Segoe UI',Arial,Helvetica,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;color:var(--navy);margin:0 0 .5em;line-height:1.2;}
+  h2{font-size:clamp(24px,3vw,32px);}
+  h3{font-size:19px;color:var(--plum);}
+  p{margin:0 0 1em;}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;
+    color:var(--magenta-deep);margin-bottom:8px;display:block;
+  }
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;background:var(--white);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:16px;}
+  .logo-link{display:flex;align-items:center;}
+  .logo-link img{height:44px;width:auto;border-radius:4px;}
+  nav.primary{display:flex;gap:26px;align-items:center;}
+  nav.primary a{
+    text-decoration:none;color:var(--charcoal);font-size:15px;font-weight:600;
+    padding:6px 2px;border-bottom:2px solid transparent;
+  }
+  nav.primary a:hover{border-bottom-color:var(--magenta);}
+  .btn{
+    display:inline-block;background:linear-gradient(135deg,var(--blue),var(--magenta-deep));
+    color:#fff;text-decoration:none;padding:11px 22px;border-radius:30px;font-weight:700;
+    font-size:14px;letter-spacing:.02em;border:none;cursor:pointer;
+  }
+  .btn:hover{filter:brightness(1.08);}
+  .btn.ghost{background:transparent;color:var(--navy);border:2px solid var(--navy);padding:9px 20px;}
+  #nav-toggle{display:none;}
+  .burger{display:none;font-size:26px;background:none;border:none;color:var(--navy);cursor:pointer;}
+
+  /* hero */
+  .hero{
+    background:radial-gradient(circle at 15% 20%, #EFE4EE 0%, var(--bg) 55%);
+    padding:64px 0 56px;border-bottom:1px solid var(--border);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;}
+  .hero h1{font-size:clamp(30px,4.2vw,46px);}
+  .hero .lead{font-size:18px;color:#555;max-width:52ch;}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;}
+  .hero-card{
+    background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;box-shadow:0 18px 40px -22px rgba(74,29,60,.35);
+  }
+  .hero-card ul{margin:0;padding-left:20px;}
+  .hero-card li{margin-bottom:8px;font-size:15px;}
+  .hero-card h3{margin-top:0;}
+
+  section{padding:60px 0;}
+  section.alt{background:var(--bg-panel);}
+  .section-head{max-width:640px;margin:0 auto 36px;text-align:center;}
+  .section-head p{color:#555;}
+
+  /* services */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{
+    background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .card .icon{
+    width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--blue),var(--magenta-deep));color:#fff;font-weight:800;
+    font-family:Georgia,serif;font-size:18px;margin-bottom:14px;
+  }
+  .card p{font-size:14.5px;color:#555;margin-bottom:0;}
+
+  /* who we help */
+  .chip-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+  .chip{
+    background:var(--white);border:1px solid var(--border);border-radius:30px;
+    padding:10px 20px;font-size:14px;font-weight:600;color:var(--navy);
+  }
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center;}
+  .about-photo{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px;text-align:center;
+  }
+  .about-photo .initials{
+    width:96px;height:96px;border-radius:50%;margin:0 auto 16px;
+    background:linear-gradient(135deg,var(--blue),var(--magenta-deep));
+    color:#fff;font-family:Georgia,serif;font-size:34px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .about-photo .role{color:#666;font-size:14px;}
+  .about-text ul{padding-left:20px;}
+  .about-text li{margin-bottom:8px;font-size:15px;}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:step;}
+  .step{position:relative;padding-top:8px;}
+  .step .num{
+    display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;
+    align-items:center;justify-content:center;font-weight:700;margin-bottom:12px;font-size:15px;
+  }
+  .step h3{font-size:16px;margin-bottom:6px;}
+  .step p{font-size:14px;color:#555;}
+
+  /* partner */
+  .partner-box{
+    background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;
+  }
+  .partner-mark{
+    flex:0 0 auto;width:64px;height:64px;border-radius:14px;
+    background:var(--plum);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-weight:700;font-size:22px;
+  }
+  .partner-box .txt{flex:1;min-width:240px;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .info-list{list-style:none;padding:0;margin:0 0 24px;}
+  .info-list li{margin-bottom:14px;font-size:15px;}
+  .info-list b{display:block;color:var(--navy);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;}
+  form{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
+  label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin:14px 0 6px;}
+  label:first-child{margin-top:0;}
+  input,textarea{
+    width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:8px;
+    font-family:inherit;font-size:14.5px;background:#FDFCFD;
+  }
+  textarea{min-height:100px;resize:vertical;}
+  form .btn{margin-top:18px;width:100%;}
+
+  footer{background:var(--bg-dark);color:#E9E1E8;padding:44px 0 26px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;margin-bottom:28px;}
+  footer .logo-badge{background:#fff;display:inline-block;padding:8px;border-radius:10px;margin-bottom:14px;}
+  footer .logo-badge img{height:36px;}
+  footer p{color:#C9BDC7;font-size:14px;}
+  footer h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{margin-bottom:10px;}
+  footer a{color:#D9CDD6;text-decoration:none;font-size:14px;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{border-top:1px solid #3A2A3A;padding-top:20px;font-size:12.5px;color:#9C8C99;text-align:center;}
+
+  @media (max-width:900px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;}
+    .grid-3{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    nav.primary{
+      position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;
+      align-items:flex-start;padding:16px 24px;border-bottom:1px solid var(--border);
+      display:none;gap:4px;
+    }
+    #nav-toggle:checked ~ nav.primary{display:flex;}
+    .burger{display:block;}
+    .nav-row .btn.ghost{display:none;}
+    .grid-3{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .partner-box{flex-direction:column;text-align:center;}
+  }
+</style>
+
+</head>
+<body>
+<header>
+  <div class="nav-row wrap">
+    <a class="logo-link" href="#top" aria-label="Bragg Care Business Advisory home">
+      <img class="brand-logo" alt="Bragg Care Business Advisory logo">
+    </a>
+    <input type="checkbox" id="nav-toggle">
+    <nav class="primary">
+      <a href="#services">Services</a>
+      <a href="#who-we-help">Who We Help</a>
+      <a href="#about">About</a>
+      <a href="#partners">Funding Partner</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="#contact" class="btn">Book a Consultation</a>
+      <label for="nav-toggle" class="burger" aria-label="Toggle menu">&#9776;</label>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Healthcare Business Advisory</span>
+      <h1>Winning proposals and compliant, fundable care businesses.</h1>
+      <p class="lead">Bragg Care Business Advisory helps care homes, domiciliary care agencies, supported living, independent living and childcare providers win local authority contracts, meet CQC and Ofsted requirements, and access the funding they need to grow.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn">Book a Free Consultation</a>
+        <a href="#services" class="btn ghost">See Our Services</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>We help you with</h3>
+      <ul>
+        <li>Tender &amp; proposal writing for local authority contracts</li>
+        <li>CQC registration &amp; inspection readiness</li>
+        <li>Ofsted regulatory compliance</li>
+        <li>Childcare &amp; early years support</li>
+        <li>Access to healthcare business funding</li>
+        <li>New provider set-up guidance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What We Do</span>
+      <h2>Advisory support built around your business</h2>
+      <p>From your first tender to your next CQC inspection, we work alongside care providers as a hands-on advisory partner.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">T</div>
+        <h3>Tender &amp; Proposal Writing</h3>
+        <p>We write and refine proposals on behalf of care businesses bidding for local authority contracts &mdash; from PQQs to full method statements.</p>
+      </div>
+      <div class="card">
+        <div class="icon">C</div>
+        <h3>CQC Regulatory Compliance</h3>
+        <p>Registration support, Fundamental Standards guidance and inspection readiness for care homes, domiciliary care and supported living providers.</p>
+      </div>
+      <div class="card">
+        <div class="icon">O</div>
+        <h3>Ofsted Regulatory Compliance</h3>
+        <p>Guidance for providers whose services fall under Ofsted registration, including children&rsquo;s residential and childcare-adjacent settings.</p>
+      </div>
+      <div class="card">
+        <div class="icon">F</div>
+        <h3>Healthcare Business Funding</h3>
+        <p>In partnership with Second Chance Financial Ltd, we help care businesses access start-up loans and other funding routes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">S</div>
+        <h3>New Provider Set-Up</h3>
+        <p>Structured guidance for launching a care home, domiciliary care agency, supported living or sheltered accommodation service.</p>
+      </div>
+      <div class="card">
+        <div class="icon">A</div>
+        <h3>Ongoing Advisory</h3>
+        <p>Continued support with contract renewals, quality assurance and building a pipeline of future tender opportunities.</p>
+      </div>
+      <div class="card">
+        <div class="icon">K</div>
+        <h3>Childcare &amp; Early Years Support</h3>
+        <p>Registration and compliance guidance for childminders, nurseries and children&rsquo;s homes, plus tender and funding support for childcare providers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who-we-help" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Who We Help</span>
+      <h2>Built for UK healthcare and childcare providers</h2>
+    </div>
+    <div class="chip-row">
+      <span class="chip">Care Homes</span>
+      <span class="chip">Domiciliary Care Agencies</span>
+      <span class="chip">Home Care Agencies</span>
+      <span class="chip">Supported Living</span>
+      <span class="chip">Independent Living</span>
+      <span class="chip">Sheltered Accommodation</span>
+      <span class="chip">Children&rsquo;s Homes</span>
+      <span class="chip">Nurseries</span>
+      <span class="chip">Childminders</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <div class="initials">B</div>
+      <h3 style="margin-bottom:2px;">Bragg Care Business Advisory</h3>
+      <div class="role">Advisory Partner for Care &amp; Childcare Providers</div>
+    </div>
+    <div class="about-text">
+      <span class="eyebrow">About BCBA</span>
+      <h2>A research-led approach to care business advisory</h2>
+      <p>Bragg Care Business Advisory (BCBA) is built on a research-led approach to advisory work: careful research, close reading of complex regulatory and tender documents, and clear, evidence-based writing underpin everything we do.</p>
+      <p>We pair that foundation with structured, ongoing specialist training in health and social care regulation, childcare and early years compliance, public sector commissioning, and bid writing &mdash; and work closely with Second Chance Financial Ltd on the funding side, so clients get proposal writing, compliance guidance and funding support from one advisory relationship.</p>
+      <ul>
+        <li>Structured, ongoing training in CQC, Ofsted and early years compliance</li>
+        <li>Specialist bid and tender writing for public sector contracts</li>
+        <li>Direct partnership with Second Chance Financial Ltd for funding applications</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How We Work</span>
+      <h2>A simple, structured process</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <h3>Free Consultation</h3>
+        <p>We learn about your service, your goals and where you need support &mdash; tendering, compliance, funding, or all three.</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <h3>Assessment</h3>
+        <p>We review your current position against CQC/Ofsted requirements or the tender opportunity in question.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <h3>Delivery</h3>
+        <p>We write your proposal, prepare your compliance documentation, or support your funding application.</p>
+      </div>
+      <div class="step">
+        <span class="num">4</span>
+        <h3>Ongoing Support</h3>
+        <p>We stay on as your advisory partner for renewals, inspections and future opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Funding Partner</span>
+      <h2>Working with Second Chance Financial Ltd</h2>
+    </div>
+    <div class="partner-box">
+      <div class="partner-mark">SCF</div>
+      <div class="txt">
+        <h3 style="margin-bottom:6px;">Second Chance Financial Ltd</h3>
+        <p style="margin-bottom:0;">BCBA partners with Second Chance Financial Ltd to connect care businesses with healthcare business funding, including start-up loans and other finance routes, alongside our tendering and compliance support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="alt">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Let&rsquo;s talk about your care business</h2>
+      <p>Whether you&rsquo;re preparing a tender, getting ready for a CQC inspection, or looking into funding options, we&rsquo;d like to hear from you.</p>
+      <ul class="info-list">
+        <li><b>Email</b>hello@braggcarebusinessadvisory.co.uk</li>
+        <li><b>Website</b>www.braggcarebusinessadvisory.co.uk</li>
+        <li><b>Areas of Support</b>Care Homes &middot; Domiciliary Care &middot; Supported Living &middot; Independent Living &middot; Sheltered Accommodation &middot; Childcare &amp; Early Years</li>
+      </ul>
+    </div>
+    <form action="mailto:hello@braggcarebusinessadvisory.co.uk" method="post" enctype="text/plain">
+      <label for="name">Name</label>
+      <input id="name" name="Name" type="text" required>
+      <label for="org">Organisation</label>
+      <input id="org" name="Organisation" type="text">
+      <label for="email">Email</label>
+      <input id="email" name="Email" type="email" required>
+      <label for="message">How can we help?</label>
+      <textarea id="message" name="Message" required></textarea>
+      <button type="submit" class="btn">Send Enquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo-badge"><img class="brand-logo" alt="Bragg Care Business Advisory logo"></div>
+        <p>Advisory support for UK healthcare and childcare businesses &mdash; tendering, CQC &amp; Ofsted compliance, and funding.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Tender &amp; Proposal Writing</a></li>
+          <li><a href="#services">CQC Compliance</a></li>
+          <li><a href="#services">Ofsted Compliance</a></li>
+          <li><a href="#services">Childcare &amp; Early Years</a></li>
+          <li><a href="#partners">Funding Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About BCBA</a></li>
+          <li><a href="#who-we-help">Who We Help</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Bragg Care Business Advisory Ltd. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+(function(){
+  var logo = "data:image/jpeg;base64,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";
+  document.querySelectorAll('img.brand-logo').forEach(function(img){ img.src = logo; });
+})();
+</script>
+
+</body>
+</html>
